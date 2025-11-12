@@ -1,8 +1,8 @@
 
 
-# CRUD Node Colaboradores
+# Exemplo de Projeto CRUD com Node.js, Express, TypeScript e Prisma
 
-Este é um projeto de CRUD (Create, Read, Update, Delete) para gerenciar colaboradores usando Node.js, Express, TypeScript e Prisma.
+Este é um exemplo de projeto de API com CRUD (Create, Read, Update, Delete) para gerenciar colaboradores usando Node.js, Express, TypeScript e Prisma.
 
 ## Requisitos
 
@@ -12,29 +12,25 @@ Este é um projeto de CRUD (Create, Read, Update, Delete) para gerenciar colabor
 ## Instalação
 
 1. Clone o repositório:
-   ```sh
-   git clone https://github.com/seu-usuario/crud-node-colaboradores.git
-   cd crud-node-colaboradores
-   ```
 
 2. Instale as dependências:
 
 ```bash
-npm install
+npm c i
 ```
 
 3. Configure o banco de dados:
 
 Crie um banco de dados MySQL.
-Atualize a URL do banco de dados no arquivo .env:
+Atualize a URL do banco de dados no arquivo .env (Crie o arquivo se não existir):
 
 ```bash
 DATABASE_URL="mysql://usuario:senha@host:porta/nome_do_banco"
 ```
-4. Execute as migrações do Prisma para criar as tabelas no banco de dados:
+4. Execute o comando para criar as tabelas no banco de dados com base no esquema Prisma:
 
 ```bash
-npx prisma migrate dev --name init
+npx prisma db push
 ```
 
 5. Gere o cliente Prisma:
@@ -51,11 +47,11 @@ npm run dev
 
 O servidor estará disponível em http://localhost:3001.
 
-Endpoints
-Criar Colaborador
-URL: /criar
-Método: POST
-Corpo da Requisição:
+Endpoints  
+Criar Colaborador  
+URL: /criar  
+Método: POST  
+Corpo da Requisição:  
 
 ```bash
 {
@@ -65,14 +61,14 @@ Corpo da Requisição:
   "email": "joao.silva@example.com"
 }
 ```
-Listar Colaboradores
-URL: /listar
-Método: GET
+Listar Colaboradores  
+URL: /listar  
+Método: GET  
 
-Editar Colaborador
-URL: /editar
-Método: PUT
-Corpo da Requisição:
+Editar Colaborador  
+URL: /editar  
+Método: PUT  
+Corpo da Requisição:  
 ```bash
 {
   "id": 1,
@@ -82,35 +78,73 @@ Corpo da Requisição:
   "email": "joao.silva@example.com"
 }
 ```
-Deletar Colaborador
-URL: /deletar
-Método: DELETE
-Corpo da Requisição:
+Deletar Colaborador  
+URL: /deletar  
+Método: DELETE  
+Corpo da Requisição:  
 ```bash
 {
   "id": 1
 }
 ```
-Unique Colaborador
-URL: /unique
-Método: GET
-Params: id
+Unique Colaborador  
+URL: /unique  
+Método: GET  
+Params: id  
 
-Estrutura do Projeto
-src
-    controller/
-        CriarColaboradorController.ts
-        ListarColaboradoresController.ts
-        EditarColaboradorController.ts
-        DeletarColaboradorController.ts
-        UniqueColaboradorController.ts
-    service/
-        CriarColaboradorService.ts
-        ListarColaboradoresService.ts
-        EditarColaboradorService.ts
-        DeletarColaboradorService.ts
-        UniqueColaboradorService.ts
-    prisma/
-        index.ts
-    routes.ts
-    server.ts
+Estrutura Inicial do Projeto  
+src  
+&nbsp;controller/  
+&nbsp;&nbsp;CriarColaboradorController.ts  
+&nbsp;&nbsp;ListarColaboradoresController.ts  
+&nbsp;&nbsp;EditarColaboradorController.ts  
+&nbsp;&nbsp;DeletarColaboradorController.ts  
+&nbsp;&nbsp;UniqueColaboradorController.ts  
+&nbsp;service/  
+&nbsp;&nbsp;CriarColaboradorService.ts  
+&nbsp;&nbsp;ListarColaboradoresService.ts  
+&nbsp;&nbsp;EditarColaboradorService.ts  
+&nbsp;&nbsp;DeletarColaboradorService.ts  
+&nbsp;&nbsp;UniqueColaboradorService.ts  
+&nbsp;prisma/  
+&nbsp;&nbsp;index.ts  
+&nbsp;routes.ts  
+&nbsp;server.ts  
+
+## Criação inicial
+
+Para criar um projeto node com typescript
+
+1.Crie e abra uma pasta para o projeto no terminal
+
+2.Digite os comandos
+```bash
+npm init -y
+npm install typescript --save-dev
+tsc --init
+npm install express
+npm install tsx
+npm install prisma
+npm install @prisma/client
+npx prisma init
+
+```
+3.Altere o arquivo tsconfig.json de acordo com sua preferencia ou necessidades do projeto
+
+4.Na raiz do projeto, crie a pasta src, e dentro dela as pastas controller, service e prisma, e os arquivos server.ts e routes.ts
+
+5.Dentro das pastas controller, ficaram os arquivos responsaveis por receber as requisições e chamar os services, dentro da pasta service, ficarão os arquivos responsaveis pela logica de negocio, e dentro da pasta prisma ficará o arquivo index.ts que fara a conexão com o banco de dados. (Costumo utilizar um controller e service por funcionalidade, mas isso pode variar conforme a necessidade do projeto)
+
+6.No arquivo index.ts dentro da pasta prisma, coloque o seguinte codigo para fazer a conexão com o banco de dados
+
+```typescript
+import {PrismaClient} from '@prisma/client' // Importando o PrismaClient da ORM prisma
+
+const prismaClient = new PrismaClient(); // Instanciando o PrismaClient
+
+export default prismaClient; // Exportando o PrismaClient para uso em outras partes do projeto
+```
+7.Para os arquivos server.ts e routes.ts, você pode seguir o exemplo do projeto para configurar o servidor express e as rotas da API.
+
+8.Comece a programar, se inspire nos codigos presentes nesse projeto se necessario
+

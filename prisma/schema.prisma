@@ -1,16 +1,19 @@
+// Definindo o gerador do cliente Prisma
 generator client {
   provider = "prisma-client-js"
 }
 
+// Definindo o banco de dados como MySQL e a URL de conexão a partir da variável de ambiente DATABASE_URL
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
+// Modelo para a tabela 'colaborador'
 model colaborador {
-  id              Int      @id @default(autoincrement())
-  nome            String   @db.VarChar(255)
-  cpf             String   @unique(map: "cpf") @db.VarChar(11)
-  data_nascimento DateTime @db.Date
-  email           String   @unique(map: "email") @db.VarChar(255)
+  id              Int           @id @default(autoincrement())
+  email           String?       @unique(map: "email") @db.VarChar(255)
+  cpf             String?       @unique(map: "cpf") @db.VarChar(11)
+  data_nascimento DateTime      @db.Date
+  nome            String        @db.VarChar(255)
 }
